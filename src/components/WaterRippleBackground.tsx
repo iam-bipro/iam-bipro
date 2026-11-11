@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
@@ -9,6 +9,7 @@ const FRAME_INTERVAL = 1000 / 60;
 
 const vertexShader = `
   varying vec2 vUv;
+
   void main() {
     vUv = uv;
     gl_Position = vec4(position, 1.0);
@@ -17,10 +18,12 @@ const vertexShader = `
 
 const simulationShader = `
   precision mediump float;
+
   uniform sampler2D uState;
   uniform vec2 uTexel;
   uniform vec2 uPointer;
   uniform float uPointerStrength;
+  uniform float uPointerRadius;
   varying vec2 vUv;
 
   void main() {
@@ -32,7 +35,8 @@ const simulationShader = `
     float down = texture2D(uState, vUv - vec2(0.0, uTexel.y)).r;
     float up = texture2D(uState, vUv + vec2(0.0, uTexel.y)).r;
     float laplacian = left + right + down + up - height * 4.0;
-    float impulse = exp(-distance(vUv, uPointer) * 55.0) * uPointerStrength;
+    float distanceToPointer = distance(vUv, uPointer);
+    float impulse = exp(-pow(distanceToPointer / uPointerRadius, 2.0)) * uPointerStrength;
 
     velocity += laplacian * 0.20;
     velocity *= 0.982;
@@ -46,6 +50,7 @@ const simulationShader = `
 
 const displayShader = `
   precision mediump float;
+
   uniform sampler2D uSimulation;
   uniform vec2 uSimulationTexel;
   uniform vec2 uResolution;
@@ -59,16 +64,17 @@ const displayShader = `
     float up = texture2D(uSimulation, vUv + vec2(0.0, uSimulationTexel.y)).r;
     vec2 normal = vec2(left - right, down - up) * 2.6;
     vec2 uv = vUv + normal * 0.018;
+    vec2 aspect = vec2(uResolution.x / uResolution.y, 1.0);
     float blueGlow = smoothstep(0.95, 0.05, distance(uv, vec2(0.20, 0.20)));
-    float magentaGlow = smoothstep(0.85, 0.05, distance(uv, vec2(0.90, 0.72)));
+    float violetGlow = smoothstep(0.85, 0.05, distance(uv, vec2(0.90, 0.72)));
     float cyanGlow = smoothstep(0.72, 0.02, distance(uv, vec2(0.05, 0.82)));
     float surfaceLight = height * 2.4 + dot(normal, vec2(0.65, 0.8));
     vec3 color = vec3(0.035, 0.035, 0.075);
     color += vec3(0.10, 0.14, 0.35) * blueGlow * 0.8;
-    color += vec3(0.30, 0.08, 0.30) * magentaGlow * 0.6;
+    color += vec3(0.30, 0.08, 0.30) * violetGlow * 0.6;
     color += vec3(0.05, 0.24, 0.38) * cyanGlow * 0.55;
     color += vec3(0.10, 0.13, 0.30) * surfaceLight;
-    color += vec3(0.04, 0.05, 0.12) * (uResolution.x / uResolution.y);
+    color += vec3(0.04, 0.05, 0.12) * aspect.x;
 
     gl_FragColor = vec4(color, 0.94);
   }
@@ -80,42 +86,19 @@ function isInteractiveTarget(target: EventTarget | null) {
   );
 }
 
-export default function FluidBackground() {
+export default function WaterRippleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    let renderer: THREE.WebGLRenderer;
-    try {
-      renderer = new THREE.WebGLRenderer({
-        canvas,
-        alpha: true,
-        antialias: false,
-        powerPreference: "low-power",
-      });
-    } catch {
-      canvas.classList.add("webgl-fallback");
-      const updateFallbackPointer = (event: PointerEvent) => {
-        if (isInteractiveTarget(event.target)) return;
-        canvas.style.setProperty("--pointer-x", `${event.clientX}px`);
-        canvas.style.setProperty("--pointer-y", `${event.clientY}px`);
-      };
-      const triggerFallbackRipple = (event: PointerEvent) => {
-        if (isInteractiveTarget(event.target)) return;
-        canvas.classList.remove("ripple-pulse");
-        void canvas.offsetWidth;
-        canvas.classList.add("ripple-pulse");
-      };
-      window.addEventListener("pointermove", updateFallbackPointer, { passive: true });
-      window.addEventListener("pointerdown", triggerFallbackRipple, { passive: true });
-      return () => {
-        window.removeEventListener("pointermove", updateFallbackPointer);
-        window.removeEventListener("pointerdown", triggerFallbackRipple);
-      };
-    }
-
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: false,
+      powerPreference: "low-power",
+    });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_PIXEL_RATIO));
 
     const camera = new THREE.Camera();
@@ -126,6 +109,7 @@ export default function FluidBackground() {
     const resolution = new THREE.Vector2();
     const pointerTarget = new THREE.Vector2(0.5, 0.5);
     const pointerCurrent = new THREE.Vector2(0.5, 0.5);
+    const simulationPointer = new THREE.Vector2(0.5, 0.5);
     const currentPointerStrength = { value: 0 };
     const targetPointerStrength = { value: 0 };
 
@@ -154,8 +138,9 @@ export default function FluidBackground() {
       uniforms: {
         uState: { value: readTarget.texture },
         uTexel: { value: simulationTexel },
-        uPointer: { value: pointerCurrent },
+        uPointer: { value: simulationPointer },
         uPointerStrength: currentPointerStrength,
+        uPointerRadius: { value: 0.06 },
       },
       vertexShader,
       fragmentShader: simulationShader,
@@ -171,9 +156,10 @@ export default function FluidBackground() {
       transparent: true,
       depthWrite: false,
     });
-
-    simulationScene.add(new THREE.Mesh(geometry, simulationMaterial));
-    displayScene.add(new THREE.Mesh(geometry, displayMaterial));
+    const simulationMesh = new THREE.Mesh(geometry, simulationMaterial);
+    const displayMesh = new THREE.Mesh(geometry, displayMaterial);
+    simulationScene.add(simulationMesh);
+    displayScene.add(displayMesh);
 
     const resize = () => {
       const width = window.innerWidth;
@@ -210,6 +196,7 @@ export default function FluidBackground() {
         0.22,
       );
       targetPointerStrength.value *= 0.88;
+      simulationPointer.copy(pointerCurrent);
 
       simulationMaterial.uniforms.uState.value = readTarget.texture;
       renderer.setRenderTarget(writeTarget);
@@ -243,5 +230,5 @@ export default function FluidBackground() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="fluid-background" aria-hidden="true" />;
+  return <canvas ref={canvasRef} className="water-ripple-canvas" aria-hidden="true" />;
 }

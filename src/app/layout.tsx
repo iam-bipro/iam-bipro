@@ -1,7 +1,5 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import FluidBackground from "@/components/canvas/FluidBackground";
-import MotionProvider from "@/components/MotionProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,14 +10,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col overflow-x-hidden">
-        <div className="relative min-h-screen overflow-hidden">
-          <FluidBackground />
-          <div className="relative z-[1]">
-            <MotionProvider>{children}</MotionProvider>
-          </div>
-        </div>
-      </body>
+      <body className="min-h-full flex flex-col overflow-x-hidden">{children}</body>
     </html>
   );
 }
