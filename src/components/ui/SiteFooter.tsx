@@ -102,7 +102,7 @@ export default function SiteFooter() {
       <div className="footer-lower">
         <div className="footer-links-column">
           <span className="footer-column-title">NAVIGATE</span>
-          <a href="#">Home</a>
+          <a href="/">Home</a>
           <a href="#work">Selected work</a>
           <a href="https://github.com/iam-bipro" target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={12} /></a>
         </div>

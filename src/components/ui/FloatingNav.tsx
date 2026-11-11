@@ -25,7 +25,7 @@ export default function FloatingNav() {
       aria-label="Primary navigation"
     >
       <a
-        href="#"
+        href="/"
         className="group flex shrink-0 items-center gap-2.5 rounded-xl outline-none"
         aria-label="Bipradip Nandy home"
         onClick={closeMenu}
