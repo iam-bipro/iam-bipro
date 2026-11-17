@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useState } from "react";
+import { ArrowUpRight, BriefcaseBusiness, GitBranch, MessageCircle, UserRound } from "lucide-react";
 import WaterRippleBackground from "@/components/WaterRippleBackground";
 
 const projects = [
@@ -52,16 +53,13 @@ const skills = [
   "PostgreSQL", "Prisma", "Redis", "DSA", "Competitive Programming",
 ];
 
-function ArrowUpRight() {
-  return <span aria-hidden="true" className="text-lg">↗</span>;
-}
-
 export default function Home() {
   const [activeProject, setActiveProject] = useState(0);
 
   return (
     <main className="site-shell">
       <WaterRippleBackground />
+      <a className="skip-link" href="#work">Skip to selected work</a>
 
       <nav className="glass-nav">
         <a href="/" className="brand-mark" aria-label="Bipradip Nandy home">
@@ -87,7 +85,7 @@ export default function Home() {
             real-time systems, intelligent products, and thoughtful interfaces.
           </p>
           <div className="hero-actions">
-            <a className="primary-button" href="#work">Explore my work <ArrowUpRight /></a>
+            <a className="primary-button" href="#work">Explore my work <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.8} /></a>
             <a className="text-button" href="https://github.com/iam-bipro" target="_blank" rel="noreferrer">View GitHub <span>→</span></a>
           </div>
         </div>
@@ -174,7 +172,7 @@ export default function Home() {
         <div>
           <h2>Let&apos;s make<br /><span>something useful.</span></h2>
         </div>
-        <a className="contact-email" href="https://github.com/iam-bipro" target="_blank" rel="noreferrer">github.com/iam-bipro <ArrowUpRight /></a>
+        <a className="contact-email" href="https://github.com/iam-bipro" target="_blank" rel="noreferrer">github.com/iam-bipro <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.8} /></a>
       </section>
 
       <footer>
@@ -184,11 +182,11 @@ export default function Home() {
       </footer>
 
       <div className="app-dock" aria-label="Quick links">
-        <a href="#work" title="Work"><span className="dock-icon icon-work">W</span></a>
-        <a href="#about" title="About"><span className="dock-icon icon-about">A</span></a>
-        <a href="https://github.com/iam-bipro" target="_blank" rel="noreferrer" title="GitHub"><span className="dock-icon icon-mail">↗</span></a>
+        <a href="#work" title="Work" aria-label="Jump to selected work"><span className="dock-icon icon-work"><BriefcaseBusiness aria-hidden="true" size={17} /></span></a>
+        <a href="#about" title="About" aria-label="Jump to about"><span className="dock-icon icon-about"><UserRound aria-hidden="true" size={17} /></span></a>
+        <a href="https://github.com/iam-bipro" target="_blank" rel="noreferrer" title="GitHub" aria-label="Open GitHub profile"><span className="dock-icon icon-mail"><GitBranch aria-hidden="true" size={17} /></span></a>
         <span className="dock-divider" />
-        <a href="#contact" title="Contact"><span className="dock-icon icon-chat">C</span></a>
+        <a href="#contact" title="Contact" aria-label="Jump to contact"><span className="dock-icon icon-chat"><MessageCircle aria-hidden="true" size={17} /></span></a>
       </div>
     </main>
   );
