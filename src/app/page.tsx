@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { ArrowUpRight, BriefcaseBusiness, GitBranch, MessageCircle, UserRound } from "lucide-react";
+import Image from "next/image";
 import WaterRippleBackground from "@/components/WaterRippleBackground";
 
 export default function Home() {
@@ -41,7 +42,16 @@ export default function Home() {
         <div className="profile-card glass-card" id="about">
           <div className="profile-topline"><span>Ichhapur · India</span></div>
           <div className="avatar-wrap">
-            <div className="avatar">BN</div>
+            <div className="avatar">
+              <Image
+                src="/bipradip-portrait.png"
+                alt="Bipradip Nandy in an orange suit"
+                fill
+                priority
+                sizes="(max-width: 760px) 100vw, 320px"
+                className="avatar-portrait"
+              />
+            </div>
             <span className="avatar-ring" />
             <span className="avatar-spark">✦</span>
           </div>
