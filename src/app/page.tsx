@@ -67,9 +67,9 @@ export default function Home() {
           <span>bipradip<span className="muted">.dev</span></span>
         </a>
         <div className="nav-links">
-          <a href="#work">Work</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+          <a href="/work">Work</a>
+          <a href="/about">About</a>
+          <a href="/connect">Connect</a>
         </div>
         <a href="https://github.com/iam-bipro" target="_blank" rel="noreferrer" className="nav-availability">
           <span className="status-dot" /> github.com/iam-bipro
@@ -85,7 +85,7 @@ export default function Home() {
             real-time systems, intelligent products, and thoughtful interfaces.
           </p>
           <div className="hero-actions">
-            <a className="primary-button" href="#work">Explore my work <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.8} /></a>
+            <a className="primary-button" href="/work">Explore my work <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.8} /></a>
             <a className="text-button" href="https://github.com/iam-bipro" target="_blank" rel="noreferrer">View GitHub <span>→</span></a>
           </div>
         </div>
@@ -178,15 +178,15 @@ export default function Home() {
       <footer>
         <span>© 2026 Bipradip Nandy</span>
         <span className="footer-note">Built with curiosity & good coffee</span>
-        <div className="social-links"><a href="https://github.com/iam-bipro" target="_blank" rel="noreferrer">GitHub</a><a href="#work">Projects</a><a href="#about">About</a></div>
+        <div className="social-links"><a href="https://github.com/iam-bipro" target="_blank" rel="noreferrer">GitHub</a><a href="/work">Projects</a><a href="/about">About</a><a href="/connect">Connect</a></div>
       </footer>
 
       <div className="app-dock" aria-label="Quick links">
-        <a href="#work" title="Work" aria-label="Jump to selected work"><span className="dock-icon icon-work"><BriefcaseBusiness aria-hidden="true" size={17} /></span></a>
-        <a href="#about" title="About" aria-label="Jump to about"><span className="dock-icon icon-about"><UserRound aria-hidden="true" size={17} /></span></a>
+        <a href="/work" title="Work" aria-label="Open selected work"><span className="dock-icon icon-work"><BriefcaseBusiness aria-hidden="true" size={17} /></span></a>
+        <a href="/about" title="About" aria-label="Open about page"><span className="dock-icon icon-about"><UserRound aria-hidden="true" size={17} /></span></a>
         <a href="https://github.com/iam-bipro" target="_blank" rel="noreferrer" title="GitHub" aria-label="Open GitHub profile"><span className="dock-icon icon-mail"><GitBranch aria-hidden="true" size={17} /></span></a>
         <span className="dock-divider" />
-        <a href="#contact" title="Contact" aria-label="Jump to contact"><span className="dock-icon icon-chat"><MessageCircle aria-hidden="true" size={17} /></span></a>
+        <a href="/connect" title="Connect" aria-label="Open connect page"><span className="dock-icon icon-chat"><MessageCircle aria-hidden="true" size={17} /></span></a>
       </div>
     </main>
   );

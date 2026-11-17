@@ -98,6 +98,38 @@ footer { align-items: center; color: #686678; display: flex; font-size: 10px; ju
 .icon-mail { background: var(--paper-deep); color: var(--ink); }
 .icon-chat { background: #b8c8bc; color: var(--ink); font-size: 8px; }
 .dock-divider { background: var(--line); height: 22px; width: 1px; }
+.route-shell { padding-bottom: 90px; }
+.route-hero { margin: 110px auto 80px; max-width: 760px; position: relative; z-index: 1; }
+.route-kicker { color: var(--paper-deep); font-size: 11px; letter-spacing: .08em; margin: 0 0 18px; text-transform: uppercase; }
+.route-hero h1 { margin: 0 0 26px; }
+.route-intro { color: #d7d2c7; font-size: 16px; line-height: 1.7; margin: 0; max-width: 560px; }
+.back-link { color: var(--paper-deep); display: inline-flex; margin-top: 30px; min-height: 44px; align-items: center; }
+.route-project-grid, .about-grid, .connect-grid { display: grid; gap: 17px; margin: 0 auto 100px; max-width: 1080px; position: relative; z-index: 1; }
+.route-project-grid { grid-template-columns: repeat(2, 1fr); }
+.route-project-card, .route-panel, .connect-card { border-radius: 10px; padding: 28px; }
+.route-project-card { min-height: 270px; }
+.route-project-topline { color: var(--muted); display: flex; font-size: 10px; justify-content: space-between; gap: 16px; }
+.route-project-card h2, .route-panel h2, .connect-card h2 { color: var(--ink); font-size: clamp(1.7rem, 3vw, 2.5rem); letter-spacing: -.06em; line-height: 1; margin: 52px 0 14px; }
+.route-project-card p, .route-panel p, .connect-card p { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 0; }
+.route-card-link, .route-card-note { display: inline-flex; font-size: 11px; margin-top: 26px; min-height: 44px; align-items: center; }
+.route-card-link { color: var(--accent); font-weight: 600; }
+.route-card-note { color: var(--muted); }
+.about-grid { grid-template-columns: repeat(2, 1fr); margin-bottom: 17px; }
+.route-panel h2 { margin-top: 0; }
+.route-panel h2 span { color: var(--accent); }
+.route-panel small { color: #7a817a; display: block; font-size: 10px; margin-top: 8px; }
+.about-stats { margin-top: 34px; }
+.about-stats div, .route-list li { border-top: 1px solid var(--line); display: flex; gap: 18px; padding: 15px 0; }
+.about-stats strong, .route-list strong { color: var(--accent); font-size: 20px; font-weight: 500; min-width: 76px; }
+.about-stats span, .route-list span { color: var(--muted); font-size: 11px; line-height: 1.5; }
+.route-list { list-style: none; margin: 30px 0 0; padding: 0; }
+.about-toolkit { margin: 0 auto 100px; max-width: 1080px; position: relative; z-index: 1; }
+.about-toolkit h2 { color: var(--ink); font-size: clamp(1.7rem, 3vw, 2.5rem); letter-spacing: -.06em; line-height: 1; margin: 0 0 28px; }
+.about-toolkit .skill-cloud span { border-color: var(--line); color: var(--muted); }
+.connect-grid { grid-template-columns: repeat(2, 1fr); margin-bottom: 100px; }
+.connect-card { min-height: 300px; }
+.connect-card h2 { margin-top: 75px; }
+.connect-card:hover { transform: translateY(-4px); transition: transform .2s ease; }
  :focus-visible { outline: 2px solid var(--paper); outline-offset: 4px; }
 @media (max-width: 1024px) {
   .hero-section { gap: 48px; grid-template-columns: minmax(0, 1fr) 310px; }
@@ -120,6 +152,11 @@ footer { align-items: center; color: #686678; display: flex; font-size: 10px; ju
   .project-art { height: 260px; }
   footer { align-items: start; flex-direction: column; gap: 14px; }
   .app-dock { bottom: 14px; max-width: calc(100vw - 28px); }
+  .route-hero { margin: 80px auto 60px; }
+  .route-project-grid, .about-grid, .connect-grid { grid-template-columns: 1fr; margin-bottom: 70px; }
+  .route-project-card, .route-panel, .connect-card { padding: 22px; }
+  .route-project-card h2, .route-panel h2, .connect-card h2 { margin-top: 38px; }
+  .connect-card h2 { margin-top: 60px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
