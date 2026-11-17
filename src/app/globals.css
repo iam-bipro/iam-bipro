@@ -162,3 +162,31 @@ footer { align-items: center; color: #686678; display: flex; font-size: 10px; ju
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+.home-shell { background: var(--paper-deep); border: 1px solid rgba(244,239,229,.75); min-height: calc(100vh - 28px); }
+.home-shell .water-ripple-canvas { opacity: .46; }
+.home-shell .glass-nav { background: rgba(244,239,229,.9); border-color: rgba(23,35,28,.16); box-shadow: 0 8px 24px rgba(23,35,28,.08); }
+.home-shell .hero-section { align-items: center; display: flex; flex-direction: column; gap: 42px; margin: clamp(72px, 11vh, 118px) auto 48px; max-width: 760px; text-align: center; }
+.home-shell .hero-copy { max-width: 650px; }
+.home-shell .eyebrow { color: var(--accent); justify-content: center; }
+.home-shell .eyebrow-line { background: var(--accent); }
+.home-shell h1 { color: var(--ink); font-size: clamp(3.7rem, 8vw, 7rem); margin: 20px 0; }
+.home-shell h1 span { color: var(--accent); }
+.home-shell .hero-intro { color: #536057; margin: 0 auto; max-width: 500px; }
+.home-shell .hero-actions { justify-content: center; }
+.home-shell .text-button { color: var(--ink); }
+.home-shell .text-button span { color: var(--accent); }
+.home-shell .profile-card { background: rgba(255,252,245,.94); border-color: rgba(23,35,28,.16); box-shadow: 0 18px 34px rgba(23,35,28,.14); text-align: left; transform: rotate(2deg); }
+.home-shell .profile-card:hover { transform: rotate(0deg) translateY(-4px); transition: transform .25s ease; }
+.home-shell .profile-name { color: var(--ink); }
+.home-shell .profile-role { color: var(--muted); }
+.home-shell .profile-topline, .home-shell .profile-footer { color: var(--muted); }
+.home-shell .stack-strip { align-items: center; border-bottom: 1px solid rgba(23,35,28,.16); border-top: 1px solid rgba(23,35,28,.16); color: var(--muted); display: flex; gap: 28px; justify-content: center; margin: 0 auto 92px; max-width: 760px; padding: 18px 0; position: relative; z-index: 1; }
+.home-shell .stack-strip > span { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.home-shell .stack-strip div { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.home-shell .stack-strip div span { border: 1px solid rgba(23,35,28,.16); border-radius: 999px; color: var(--ink); font-size: 10px; padding: 7px 10px; }
+.home-shell .app-dock { background: rgba(255,252,245,.96); }
+@media (max-width: 760px) {
+  .home-shell .hero-section { margin-top: 72px; }
+  .home-shell .stack-strip { align-items: flex-start; flex-direction: column; gap: 12px; margin-bottom: 76px; }
+  .home-shell .stack-strip div { justify-content: flex-start; }
+}

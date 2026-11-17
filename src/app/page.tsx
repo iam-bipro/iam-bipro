@@ -5,7 +5,7 @@ import WaterRippleBackground from "@/components/WaterRippleBackground";
 
 export default function Home() {
   return (
-    <main className="site-shell">
+    <main className="site-shell home-shell">
       <WaterRippleBackground />
       <a className="skip-link" href="#work">Skip to selected work</a>
 
@@ -48,6 +48,13 @@ export default function Home() {
           <div className="profile-name">Bipradip Nandy</div>
           <div className="profile-role">Full-stack web developer<br />and Computer Science student.</div>
           <div className="profile-footer"><span>Studying at <strong>KGEC</strong></span><span>Portfolio</span></div>
+        </div>
+      </section>
+
+      <section className="stack-strip" aria-label="Technology stack">
+        <span>Selected tools</span>
+        <div>
+          <span>Next.js</span><span>TypeScript</span><span>Three.js</span><span>Python</span><span>WebSockets</span>
         </div>
       </section>
 
